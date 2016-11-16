@@ -36,6 +36,7 @@ angular.module('weeklyScheduler')
         var addSlot = function (start, end) {
           start = start >= 0 ? start : 0;
           end = end <= conf.nbWeeks ? end : conf.nbWeeks;
+          console.log("addSlot end", end);
 
           var startDate = timeService.addWeek(conf.minDate, start);
           var endDate = timeService.addWeek(conf.minDate, end);

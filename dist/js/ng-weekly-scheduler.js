@@ -212,6 +212,7 @@ angular.module('weeklyScheduler')
         var addSlot = function (start, end) {
           start = start >= 0 ? start : 0;
           end = end <= conf.nbWeeks ? end : conf.nbWeeks;
+          console.log("addSlot end", end);
 
           var startDate = timeService.addWeek(conf.minDate, start);
           var endDate = timeService.addWeek(conf.minDate, end);
@@ -273,19 +274,17 @@ angular.module('weeklyScheduler')
      */
     function config(schedules, options) {
       var now = moment();
+      console.log("now", now.toDate());
+      console.log("OBJECT", now);
 
-      // Calculate min date of all scheduled events
-      var minDate = (schedules ? schedules.reduce(function (minDate, slot) {
-        return timeService.compare(slot.start, 'isBefore', minDate);
-      }, now) : now).startOf('week');
+      var minDate = now.clone().add(-2, 'hour');
 
-      // Calculate max date of all scheduled events
-      var maxDate = (schedules ? schedules.reduce(function (maxDate, slot) {
-        return timeService.compare(slot.end, 'isAfter', maxDate);
-      }, now) : now).clone().add(1, 'year').endOf('week');
+      console.log("OBJECT", minDate);
+
+      var maxDate = now.clone().add(12, 'hour');
 
       // Calculate nb of weeks covered by minDate => maxDate
-      var nbWeeks = timeService.weekDiff(minDate, maxDate);
+      var nbWeeks = 14;
 
       var result = angular.extend(options, {minDate: minDate, maxDate: maxDate, nbWeeks: nbWeeks});
       // Log configuration
@@ -555,9 +554,18 @@ angular.module('weeklyScheduler')
         //// model -> UI ////////////////////////////////////
         ngModelCtrl.$formatters.push(function onModelChange(model) {
           var ui = {
-            start: timeService.weekPreciseDiff(conf.minDate, moment(model.start), true),
-            end: timeService.weekPreciseDiff(conf.minDate, moment(model.end), true)
+            start: timeService.hourPreciseDiff(conf.minDate, moment(model.start), true),
+            end: timeService.hourPreciseDiff(conf.minDate, moment(model.end), true)
           };
+
+          console.log("----------");
+          console.log("conf.minDate",conf.minDate);
+          console.log("model.start",model.start);
+          console.log("START UI",ui.start);
+          console.log("END UI",ui.start);
+          console.log("----------");
+
+
           //$log.debug('FORMATTER :', index, scope.$index, ui);
           return ui;
         });
@@ -568,7 +576,9 @@ angular.module('weeklyScheduler')
             left: ui.start / conf.nbWeeks * 100 + '%',
             width: (ui.end - ui.start) / conf.nbWeeks * 100 + '%'
           };
-
+          console.log("END", ui.end);
+          console.log("START", ui.start);
+          console.log("width", (ui.end - ui.start) / conf.nbWeeks * 100 + '%');
           //$log.debug('RENDER :', index, scope.$index, css);
           element.css(css);
         };
@@ -589,8 +599,8 @@ angular.module('weeklySchedulerI18N')
       doys: {'de-de': 4, 'en-gb': 4, 'en-us': 6, 'fr-fr': 4},
       lang: {
         'de-de': {month: 'Monat', weekNb: 'Wochenummer', addNew: 'Hinzufügen'},
-        'en-gb': {month: 'Month', weekNb: 'Week #', addNew: 'Add'},
-        'en-us': {month: 'Month', weekNb: 'Week #', addNew: 'Add'},
+        'en-gb': {month: 'Month', weekNb: 'Hour', addNew: 'Add'},
+        'en-us': {month: 'Month', weekNb: 'Hour', addNew: 'Add'},
         'fr-fr': {month: 'Mois', weekNb: 'N° de semaine', addNew: 'Ajouter'}
       }
     };
@@ -659,7 +669,7 @@ angular.module('weeklyScheduler')
       const: {
         MONTH: MONTH,
         WEEK: WEEK,
-        FORMAT: 'YYYY-MM-DD'
+        FORMAT: 'YYYY-MM-DD HH:mm:ss'
       },
       dF: $filter('date'),
       compare: function (date, method, lastMin) {
@@ -680,6 +690,9 @@ angular.module('weeklyScheduler')
       },
       weekPreciseDiff: function (start, end) {
         return end.clone().diff(start.clone(), WEEK, true);
+      },
+      hourPreciseDiff: function (start, end) {
+        return end.clone().diff(start.clone(), 'hours');
       },
       weekDiff: function (start, end) {
         return end.clone().endOf(WEEK).diff(start.clone().startOf(WEEK), WEEK) + 1;
@@ -720,7 +733,7 @@ angular.module('ng-weekly-scheduler/views/multi-slider.html', []).run(['$templat
 
 angular.module('ng-weekly-scheduler/views/weekly-scheduler.html', []).run(['$templateCache', function($templateCache) {
   $templateCache.put('ng-weekly-scheduler/views/weekly-scheduler.html',
-    '<div class=labels><div class="srow text-right">{{schedulerCtrl.config.labels.month || \'Month\'}}</div><div class="srow text-right">{{schedulerCtrl.config.labels.weekNb || \'Week number\'}}</div><div class=schedule-animate ng-repeat="item in schedulerCtrl.items" inject></div></div><div class=schedule-area-container><div class=schedule-area><div class="srow timestamps"><monthly-grid class=grid-container></monthly-grid></div><div class="srow timestamps"><weekly-grid class=grid-container></weekly-grid></div><div class="srow schedule-animate" ng-repeat="item in schedulerCtrl.items"><weekly-grid class="grid-container striped" no-text></weekly-grid><multi-slider index={{$index}}></multi-slider></div></div></div>');
+    '<div class=labels><div class="srow text-right">{{schedulerCtrl.config.labels.weekNb }}</div><div class="row-label schedule-animate" ng-repeat="item in schedulerCtrl.items" inject></div></div><div class=schedule-area-container><div class=schedule-area><div class="srow timestamps"><weekly-grid class=grid-container></weekly-grid></div><div class="row-label srow schedule-animate" ng-repeat="item in schedulerCtrl.items"><weekly-grid class="grid-container striped" no-text></weekly-grid><multi-slider index={{$index}}></multi-slider></div></div></div>');
 }]);
 
 angular.module('ng-weekly-scheduler/views/weekly-slot.html', []).run(['$templateCache', function($templateCache) {

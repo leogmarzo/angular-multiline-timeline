@@ -16,29 +16,14 @@ angular.module('demoApp', ['ngAnimate', 'weeklyScheduler', 'weeklySchedulerI18N'
         options: {/*monoSchedule: true*/},
         items: [{
           label: 'Item 1',
-          editable: false,
+          editable: true,
           schedules: [
-            {start: moment('2015-12-27').toDate(), end: moment('2016-08-01').toDate()}
+            {start: moment('2016-11-16T11:00:00').toDate(), end: moment('2016-11-16T13:00:00').toDate()},
+            {start: moment('2016-11-16T15:00:00').toDate(), end: moment('2016-11-16T18:00:00').toDate()},
+
           ]
         }]
       };
-
-      $timeout(function () {
-        $scope.model.items = $scope.model.items.concat([{
-          label: 'Item 2',
-          schedules: [
-            {start: moment('2016-05-03').toDate(), end: moment('2017-02-01').toDate()},
-            {start: moment('2015-11-20').toDate(), end: moment('2016-02-01').toDate()}
-          ]
-        }, {
-          label: 'Item 3',
-          schedules: [
-            {start: moment('2017-08-09').toDate(), end: moment('2017-08-21').toDate()},
-            {start: moment('2017-09-12').toDate(), end: moment('2017-10-12').toDate()}
-          ]
-        }]);
-      }, 1000);
-
       this.doSomething = function (itemIndex, scheduleIndex, scheduleValue) {
         $log.debug('The model has changed!', itemIndex, scheduleIndex, scheduleValue);
       };

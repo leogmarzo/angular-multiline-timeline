@@ -167,9 +167,18 @@ angular.module('weeklyScheduler')
         //// model -> UI ////////////////////////////////////
         ngModelCtrl.$formatters.push(function onModelChange(model) {
           var ui = {
-            start: timeService.weekPreciseDiff(conf.minDate, moment(model.start), true),
-            end: timeService.weekPreciseDiff(conf.minDate, moment(model.end), true)
+            start: timeService.hourPreciseDiff(conf.minDate, moment(model.start), true),
+            end: timeService.hourPreciseDiff(conf.minDate, moment(model.end), true)
           };
+
+          console.log("----------");
+          console.log("conf.minDate",conf.minDate);
+          console.log("model.start",model.start);
+          console.log("START UI",ui.start);
+          console.log("END UI",ui.start);
+          console.log("----------");
+
+
           //$log.debug('FORMATTER :', index, scope.$index, ui);
           return ui;
         });
@@ -180,7 +189,9 @@ angular.module('weeklyScheduler')
             left: ui.start / conf.nbWeeks * 100 + '%',
             width: (ui.end - ui.start) / conf.nbWeeks * 100 + '%'
           };
-
+          console.log("END", ui.end);
+          console.log("START", ui.start);
+          console.log("width", (ui.end - ui.start) / conf.nbWeeks * 100 + '%');
           //$log.debug('RENDER :', index, scope.$index, css);
           element.css(css);
         };

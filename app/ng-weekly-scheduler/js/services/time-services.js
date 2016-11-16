@@ -9,7 +9,7 @@ angular.module('weeklyScheduler')
       const: {
         MONTH: MONTH,
         WEEK: WEEK,
-        FORMAT: 'YYYY-MM-DD'
+        FORMAT: 'YYYY-MM-DD HH:mm:ss'
       },
       dF: $filter('date'),
       compare: function (date, method, lastMin) {
@@ -30,6 +30,9 @@ angular.module('weeklyScheduler')
       },
       weekPreciseDiff: function (start, end) {
         return end.clone().diff(start.clone(), WEEK, true);
+      },
+      hourPreciseDiff: function (start, end) {
+        return end.clone().diff(start.clone(), 'hours');
       },
       weekDiff: function (start, end) {
         return end.clone().endOf(WEEK).diff(start.clone().startOf(WEEK), WEEK) + 1;

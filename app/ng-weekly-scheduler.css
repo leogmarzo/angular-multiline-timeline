@@ -21,11 +21,20 @@
   width: 15%;
   color: #666;
   border-right: 1px solid #ddd;
+  text-align: center;
 }
 
 .scheduler .labels .srow {
   padding: 0 5px;
   border-bottom: 1px solid #ddd;
+}
+
+.row-label:nth-child(even) .srow {
+    border-bottom: 0px !important;
+}
+
+.row-label:nth-child(even) .grid-container {
+    border-bottom: 0px !important;
 }
 
 .scheduler .schedule-area-container {
@@ -199,4 +208,14 @@ multi-slider weekly-slot.active {
 .schedule-animate.ng-leave, .schedule-animate.ng-hide-add {
   display: none;
   opacity: 1;
+}
+
+
+/*NEW*/
+.grid-item {
+  width: 10%;
+}
+
+.schedule-area {
+  width: 234% !important;
 }
