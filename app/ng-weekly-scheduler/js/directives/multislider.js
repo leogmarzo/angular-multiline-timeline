@@ -64,19 +64,6 @@ angular.module('weeklyScheduler')
             left: e.pageX - elOffX - hoverElementWidth / 2 + 'px'
           });
         });
-
-        hoverElement.on('click', function (event) {
-          if (!element.attr('no-add')) {
-            var elOffX = element[0].getBoundingClientRect().left;
-            var pixelOnClick = event.pageX - elOffX;
-            var valOnClick = pixelToVal(pixelOnClick);
-
-            var start = Math.round(valOnClick - defaultNewScheduleSize / 2);
-            var end = start + defaultNewScheduleSize;
-
-            addSlot(start, end);
-          }
-        });
       }
     };
   }]);

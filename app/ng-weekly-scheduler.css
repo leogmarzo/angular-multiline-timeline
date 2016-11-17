@@ -87,21 +87,13 @@ multi-slider .ghost {
   cursor: pointer;
 }
 
-multi-slider:hover .ghost {
-  display: block;
-}
-
-multi-slider.slot-hover .ghost {
-  display: none;
-}
-
 multi-slider.dragging .ghost {
   display: none;
 }
 
 multi-slider weekly-slot {
   -webkit-transition: background 0.1s ease-in;
-  cursor: all-scroll;
+  cursor: pointer;
   min-width: 10px !important;
   background: #4eb8d5;
 }

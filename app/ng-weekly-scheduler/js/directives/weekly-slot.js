@@ -63,15 +63,6 @@ angular.module('weeklyScheduler')
           deleteSelf();
         });
 
-        element.on('mouseover', function () {
-          containerEl.addClass('slot-hover');
-        });
-
-        element.on('mouseleave', function () {
-          containerEl.removeClass('slot-hover');
-        });
-
-
         if (scope.item.editable !== false) {
           scope.startResizeStart = function () {
             resizeDirectionIsStart = true;
