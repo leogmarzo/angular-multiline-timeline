@@ -26,9 +26,10 @@ angular.module('weeklyScheduler')
       var maxDate = now.clone().add(12, 'hour');
 
       // Calculate nb of weeks covered by minDate => maxDate
-      var nbWeeks = 14;
+      var nbHours = 13;
+      var nbWeeks = 840;
 
-      var result = angular.extend(options, {minDate: minDate, maxDate: maxDate, nbWeeks: nbWeeks});
+      var result = angular.extend(options, {minDate: minDate, maxDate: maxDate, nbWeeks: nbWeeks, nbHours:nbHours});
       // Log configuration
       $log.debug('Weekly Scheduler configuration:', result);
 

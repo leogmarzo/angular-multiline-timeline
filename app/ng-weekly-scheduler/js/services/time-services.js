@@ -34,6 +34,9 @@ angular.module('weeklyScheduler')
       hourPreciseDiff: function (start, end) {
         return end.clone().diff(start.clone(), 'hours');
       },
+      minutePreciseDiff: function (start, end) {
+        return end.clone().diff(start.clone(), 'minutes');
+      },
       weekDiff: function (start, end) {
         return end.clone().endOf(WEEK).diff(start.clone().startOf(WEEK), WEEK) + 1;
       },

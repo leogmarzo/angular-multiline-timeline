@@ -167,8 +167,8 @@ angular.module('weeklyScheduler')
         //// model -> UI ////////////////////////////////////
         ngModelCtrl.$formatters.push(function onModelChange(model) {
           var ui = {
-            start: timeService.hourPreciseDiff(conf.minDate, moment(model.start), true),
-            end: timeService.hourPreciseDiff(conf.minDate, moment(model.end), true)
+            start: timeService.minutePreciseDiff(conf.minDate, moment(model.start), true),
+            end: timeService.minutePreciseDiff(conf.minDate, moment(model.end), true)
           };
 
           console.log("----------");

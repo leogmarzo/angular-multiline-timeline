@@ -5,10 +5,10 @@ angular.module('weeklyScheduler')
     function doGrid(element, attrs, model) {
       var i;
       // Calculate week width distribution
-      var tickcount = model.nbWeeks;
+      var tickcount = model.nbHours;
       var ticksize = 100 / tickcount;
       var gridItemEl = GRID_TEMPLATE.css({width: ticksize + '%'});
-      var now = model.minDate.clone().startOf('week');
+      var now = model.minDate.clone();
 
       // Clean element
       element.empty();
@@ -16,7 +16,7 @@ angular.module('weeklyScheduler')
       for (i = 0; i < tickcount; i++) {
         var child = gridItemEl.clone();
         if (angular.isUndefined(attrs.noText)) {
-          child.text(now.add(i && 1, 'week').week());
+          child.text(now.add(i && 1, 'hours').format('H'));
         }
         element.append(child);
       }
