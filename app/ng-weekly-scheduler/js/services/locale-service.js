@@ -7,8 +7,8 @@ angular.module('weeklySchedulerI18N')
       doys: {'de-de': 4, 'en-gb': 4, 'en-us': 6, 'fr-fr': 4},
       lang: {
         'de-de': {month: 'Monat', weekNb: 'Wochenummer', addNew: 'Hinzufügen'},
-        'en-gb': {month: 'Month', weekNb: 'Hour', addNew: 'Add'},
-        'en-us': {month: 'Month', weekNb: 'Hour', addNew: 'Add'},
+        'en-gb': {month: 'Month', weekNb: '', addNew: 'Add'},
+        'en-us': {month: 'Month', weekNb: '', addNew: 'Add'},
         'fr-fr': {month: 'Mois', weekNb: 'N° de semaine', addNew: 'Ajouter'}
       }
     };

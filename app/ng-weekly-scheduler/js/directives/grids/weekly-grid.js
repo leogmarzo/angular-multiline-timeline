@@ -13,13 +13,38 @@ angular.module('weeklyScheduler')
       // Clean element
       element.empty();
 
-      for (i = 0; i < tickcount; i++) {
+      //First element
+        var minutesAfterFirstHour = parseInt(now.clone().format('mm'));
+
+        var tickSizeFirst = (60 - minutesAfterFirstHour)/60*ticksize;
+
+        var gridItemFirst = GRID_TEMPLATE.clone().css({width: tickSizeFirst + '%'});
+        var child = gridItemFirst.clone();
+          if (angular.isUndefined(attrs.noText)) {
+          }
+        element.append(child);
+
+      //Elements 2 to 13
+      for (i = 1; i < tickcount; i++) {
         var child = gridItemEl.clone();
         if (angular.isUndefined(attrs.noText)) {
           child.text(now.add(i && 1, 'hours').format('H'));
         }
         element.append(child);
       }
+
+      //Last element
+      var minutesAfterFirstHour = parseInt(now.clone().format('mm'));
+
+      var tickSizeLast = ticksize - tickSizeFirst;
+
+      var gridItemLast = GRID_TEMPLATE.clone().css({width: tickSizeLast + '%'});
+      var child = gridItemLast.clone();
+        if (angular.isUndefined(attrs.noText)) {
+          child.text(now.add(12 && 1, 'hours').format('H'));
+        }
+      element.append(child);
+
     }
 
     return {

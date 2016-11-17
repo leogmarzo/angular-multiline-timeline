@@ -205,7 +205,8 @@ multi-slider weekly-slot.active {
 
 /*NEW*/
 .grid-item {
-  width: 10%;
+  text-align: left !important;
+  padding-left: 5px;
 }
 
 .schedule-area {

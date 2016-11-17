@@ -18,7 +18,7 @@ angular.module('demoApp', ['ngAnimate', 'weeklyScheduler', 'weeklySchedulerI18N'
           label: 'Item 1',
           editable: true,
           schedules: [
-            {start: moment('2016-11-17T11:30:00').toDate(), end: moment('2016-11-17T11:00:00').toDate()},
+            {start: moment('2016-11-17T10:40:00').toDate(), end: moment('2016-11-18T00:37:00').toDate()},
           ]
         }]
       };
